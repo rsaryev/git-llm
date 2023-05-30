@@ -27,14 +27,14 @@ To use `git-llm`, you need to configure it first. To do this, run the following 
 git-llm config
 ```
 
-`changelog` - generates a list of changes from output `git diff --staged`
+Use a llm to generate a list of changes, then review the staged changes using `git diff --staged`.
 
 ```bash
 git-llm changelog
 ```
 
-This command reviews the changes staged for commit using `git diff --staged` and writes a commit message following the
-Conventional format.
+Use a llm to generate a commit message following the Conventional format, then review the staged changes
+using `git diff --staged`.
 
 ```bash
 git-llm commit

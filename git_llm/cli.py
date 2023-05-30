@@ -15,19 +15,14 @@ def check_for_changes():
     return diff
 
 
-def summarize_docs(llm, docs, message_prompt, changelog_prompt):
-    summary = llm.summarize_docs(docs, message_prompt, changelog_prompt)
-    print(f"\n{summary}")
-    return summary
-
-
 def changelog():
     config = get_config()
     llm = factory_llm(config)
 
     diff = check_for_changes()
     docs = llm.text_splitter(diff)
-    summarize_docs(llm, docs, m_changelog_prompt, c_changelog_prompt)
+    log = llm.summarize_docs(docs, m_changelog_prompt, c_changelog_prompt)
+    print(log)
 
 
 def commit():
@@ -37,7 +32,7 @@ def commit():
     diff = check_for_changes()
     docs = llm.text_splitter(diff)
 
-    summary = summarize_docs(llm, docs, m_commit_prompt, c_commit_prompt)
+    summary = llm.summarize_docs(docs, m_commit_prompt, c_commit_prompt)
     ask = questionary.confirm(f"🤖 Do you want to commit with message: {summary}?").ask()
     if not ask:
         print("🤖 Bye!")
