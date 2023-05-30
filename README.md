@@ -1,24 +1,17 @@
 ## git-llm
 
-The project integrates Git with a llm (OpenAI, LlamaCpp, and GPT-4-All) to extend the capabilities of git.
+The project integrates Git with a llm (OpenAI, LlamaCpp, and GPT-4-All) to extend the capabilities of git. It supports
+offline processing using [GPT4All](https://github.com/nomic-ai/gpt4all) without sharing your code with third parties, or
+you can use OpenAI if privacy is not a concern for you. It is only recommended for educational purposes and not for
+production use.
 
-## Description
-
-git-llm is a tool that allows you to generate changelog entries, and other things using OpenAI, LlamaCpp, and GPT-4-All.
-It supports
-offline processing using [GPT4All](https://github.com/nomic-ai/gpt4all) without sharing your code with third
-parties, or you can use OpenAI if privacy is not a concern for you. It is only recommended for educational purposes and
-not for production use.
-
-## Installation
+### Installation
 
 To install `git-llm`, you need to have Python 3.9 and an OpenAI API
-key [api-keys](https://platform.openai.com/account/api-keys).
-Additionally, if you want to use the GPT4All model, you need to download
-the [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin) model. If you prefer a
-different model, you can download it from [GPT4All](https://gpt4all.io) and configure path to it in the configuration
-and specify its
-path in the configuration. If you want some files to be ignored, add them to .gitignore.
+key [api-keys](https://platform.openai.com/account/api-keys). Additionally, if you want to use the GPT4All model, you
+need to download the [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin) model.
+If you prefer a different model, you can download it from [GPT4All](https://gpt4all.io) and configure path to it in the
+configuration and specify its path in the configuration. If you want some files to be ignored, add them to .gitignore.
 
 To install `git-llm`, run the following command in your terminal:
 
@@ -26,7 +19,7 @@ To install `git-llm`, run the following command in your terminal:
 pip install git-llm
 ```
 
-## Usage
+### Usage
 
 To use `git-llm`, you need to configure it first. To do this, run the following command:
 
@@ -34,15 +27,22 @@ To use `git-llm`, you need to configure it first. To do this, run the following 
 git-llm config
 ```
 
-changelog - generates a list of changes from output git diff --staged
+`changelog` - generates a list of changes from output `git diff --staged`
 
 ```bash
 git-llm changelog
 ```
 
-You can also edit the configuration manually by editing the `~/.git_llm_config.yaml` file.
-If for some reason you cannot find the configuration file, just run the tool and at the very beginning it will output
-the path to the configuration file.
+This command reviews the changes staged for commit using `git diff --staged` and writes a commit message following the
+Conventional format.
+
+```bash
+git-llm commit
+```
+
+You can also edit the configuration manually by editing the `~/.git_llm_config.yaml` file. If for some reason you cannot
+find the configuration file, just run the tool and at the very beginning it will output the path to the configuration
+file.
 
 ```yaml
 # The OpenAI API key. You can get it from https://beta.openai.com/account/api-keys
@@ -59,10 +59,10 @@ model_path: models/ggml-gpt4all-j-v1.3-groovy.bin
 model_type: openai
 ```
 
-## Features
+### Features
 
 More commands will be added in the future.
 
-## Contributing
+### Contributing
 
 Contributions are always welcome!

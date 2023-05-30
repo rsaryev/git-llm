@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "git-llm"
-version = "0.1.0"
+version = "0.1.2"
 description = "The project integrates Git with a llm (OpenAI, LlamaCpp, and GPT-4-All) to extend the capabilities of git."
 authors = ["Saryev Rustam <rsaryev1997@gmail.com>"]
 readme = "README.md"
@@ -30,4 +30,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-git-llm = "src.cli:main"
+git-llm = "git_llm.cli:main"

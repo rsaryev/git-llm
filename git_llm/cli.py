@@ -2,21 +2,47 @@ import fire
 import questionary
 
 from git_llm.llm import factory_llm
-from git_llm.prompt import c_changelog_prompt, m_changelog_prompt
+from git_llm.prompt import c_changelog_prompt, m_changelog_prompt, m_commit_prompt, c_commit_prompt
 from git_llm.utils.git import git
 from git_llm.utils.helpers import get_config, DEFAULT_CONFIG, save_config
+
+
+def check_for_changes():
+    diff = git.git_diff()
+    if not diff:
+        print("🤖 No changes found try git add .")
+        exit(0)
+    return diff
+
+
+def summarize_docs(llm, docs, message_prompt, changelog_prompt):
+    summary = llm.summarize_docs(docs, message_prompt, changelog_prompt)
+    print(f"\n{summary}")
+    return summary
 
 
 def changelog():
     config = get_config()
     llm = factory_llm(config)
 
-    diff = git.git_diff()
-    if not diff:
-        raise Exception("No changes found")
+    diff = check_for_changes()
     docs = llm.text_splitter(diff)
-    git_changelog_message = llm.summarize_docs(docs, m_changelog_prompt, c_changelog_prompt)
-    print(f"\n{git_changelog_message}")
+    summarize_docs(llm, docs, m_changelog_prompt, c_changelog_prompt)
+
+
+def commit():
+    config = get_config()
+    llm = factory_llm(config)
+
+    diff = check_for_changes()
+    docs = llm.text_splitter(diff)
+
+    summary = summarize_docs(llm, docs, m_commit_prompt, c_commit_prompt)
+    ask = questionary.confirm(f"🤖 Do you want to commit with message: {summary}?").ask()
+    if not ask:
+        print("🤖 Bye!")
+        exit(0)
+    git.git_commit(summary)
 
 
 def configure():
@@ -47,6 +73,7 @@ def main():
         fire.Fire({
             "changelog": changelog,
             "config": configure,
+            "commit": commit,
         })
     except KeyboardInterrupt:
         print("\n🤖 Bye!")

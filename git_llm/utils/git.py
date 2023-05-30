@@ -18,5 +18,8 @@ class Git:
         allowed_extensions = [f"*{ext}" for ext in ALLOW_FILES]
         return self.repo.git.diff("--staged", "--diff-filter=ACMRT", "--", *allowed_extensions)
 
+    def git_commit(self, message):
+        return self.repo.git.commit("-m", message)
+
 
 git = Git()

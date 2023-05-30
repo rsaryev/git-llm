@@ -26,7 +26,7 @@ def save_config(config):
 
 
 def get_config():
-    print(f"🤖 Loading config from {config_path}")
+    print(f"🤖 Loaded config from {config_path}")
     if os.path.exists(config_path):
         with open(config_path, "r") as f:
             config = yaml.safe_load(f)
