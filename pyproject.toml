@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "git-llm"
+version = "0.1.0"
+description = "The project integrates Git with a llm (OpenAI, LlamaCpp, and GPT-4-All) to extend the capabilities of git."
+authors = ["Saryev Rustam <rsaryev1997@gmail.com>"]
+readme = "README.md"
+keywords = ["chatgpt", "openai", "cli"]
+packages = [{ include = "git_llm" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+gitpython = "^3.1.31"
+langchain = "^0.0.184"
+halo = "^0.0.31"
+fire = "^0.5.0"
+questionary = "^1.10.0"
+urllib3 = "1.26.6"
+openai = "^0.27.7"
+tiktoken = "^0.4.0"
+torch = "^2.0.1"
+gpt4all = "^0.2.3"
+transformers = "^4.29.2"
+
+[project.urls]
+"Source" = "https://github.com/rsaryev/git-llm"
+"Bug Tracker" = "https://github.com/rsaryev/git-llm/issues"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+git-llm = "src.cli:main"
