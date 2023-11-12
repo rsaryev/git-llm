@@ -7,7 +7,7 @@ ALLOW_FILES = ['.js', '.mjs', '.ts', '.tsx', '.css', '.scss', '.less', '.html', 
 
 class Git:
     def __init__(self):
-        self.repo = Repo()
+        self.repo = Repo(search_parent_directories=True)
         if not self.has_repository():
             raise Exception("🤖 No git repository found")
 
