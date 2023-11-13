@@ -25,7 +25,7 @@ halo==0.0.31
 httptools==0.5.0
 humanfriendly==10.0
 idna==3.4
-langchain==0.0.184
+langchain==0.0.277
 log-symbols==0.0.14
 lz4==4.3.2
 marshmallow==3.19.0

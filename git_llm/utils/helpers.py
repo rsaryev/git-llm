@@ -7,6 +7,7 @@ config_path = os.path.join(os.path.expanduser("~"), ".git_llm_config.yaml")
 MODEL_TYPES = {
     "OPENAI": "openai",
     "LOCAL": "local",
+    "OLLAMA": "ollama",
 }
 
 DEFAULT_CONFIG = {

@@ -4,6 +4,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains.summarize import load_summarize_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.llms import GPT4All
+from langchain.llms import Ollama
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
@@ -67,11 +68,27 @@ class OpenAILLM(BaseLLM):
         )
 
 
+class OLLamaLLM(BaseLLM):
+    """
+    LLM that works locally on the user's machine.
+    """
+
+    def _create_model(self):
+        callback_manager = CallbackManager([StreamingStdOutCallbackHandler()])
+        llm = Ollama( 
+            model=self.config["model_name"],
+            base_url=self.config["base_url"],
+            callback_manager=callback_manager
+        )
+        return llm
+
 def factory_llm(config):
     """
     Factory function to create an LLM instance based on config.
     """
     if config["model_type"] == "openai":
         return OpenAILLM(config)
+    elif config["model_type"] == "ollama":
+        return OLLamaLLM(config)
     else:
         return LocalLLM(config)

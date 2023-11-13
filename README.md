@@ -12,6 +12,7 @@ key [api-keys](https://platform.openai.com/account/api-keys). Additionally, if y
 need to download the [ggml-gpt4all-j-v1.3-groovy.bin](https://gpt4all.io/models/ggml-gpt4all-j-v1.3-groovy.bin) model.
 If you prefer a different model, you can download it from [GPT4All](https://gpt4all.io) and configure path to it in the
 configuration and specify its path in the configuration. If you want some files to be ignored, add them to .gitignore.
+Alternatively you could point to an [Ollama](https://ollama.ai/) server.
 
 To install `git-llm`, run the following command in your terminal:
 
