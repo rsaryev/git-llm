@@ -47,6 +47,7 @@ def configure():
         choices=[
             {"name": "OpenAI", "value": "openai"},
             {"name": "Local", "value": "local"},
+            {"name": "Ollama", "value": "ollama"},
         ]
     ).ask()
     config["model_type"] = model_type
@@ -56,6 +57,12 @@ def configure():
 
         api_key = questionary.password("🤖 Enter your API key: ").ask()
         config["api_key"] = api_key
+    if model_type == "ollama":
+        model_name = input("🤖 Enter your model name (default: llama2): ") or "llama2"
+        config["model_name"] = model_name
+
+        base_url = input("🤖 Enter your base url (default: http://localhost:11434)") or "http://localhost:11434"
+        config["base_url"] = base_url
     else:
         model_path = input(f"🤖 Enter your model path: (default: {DEFAULT_CONFIG['model_path']}) ")
         config["model_path"] = model_path
